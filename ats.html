@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ATS Score Analyzer</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    
+<div class="card glass">
+   
+
+
+<h2 class="mb-4">ATS Compatibility Report</h2>
+
+<div class="card p-4 mb-4">
+    <h3>Match Score: {{ score }}%</h3>
+
+    {% if score >= 75 %}
+        <p class="text-success">Excellent Match 🚀</p>
+    {% elif score >= 50 %}
+        <p class="text-warning">Moderate Match ⚡</p>
+    {% else %}
+        <p class="text-danger">Low Match ❗</p>
+    {% endif %}
+</div>
+
+<div class="row">
+
+<div class="col-md-6">
+    <div class="card p-3">
+        <h5 class="text-success">Matched Keywords</h5>
+        <ul>
+        {% for word in matched %}
+            <li>{{ word }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="card p-3">
+        <h5 class="text-danger">Missing Keywords</h5>
+        <ul>
+        {% for word in missing %}
+            <li>{{ word }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+
+</div>
+
+<a href="/dashboard" class="btn btn-primary mt-4">Back to Dashboard</a>
+
+ </div>
+</body>
+</html>
