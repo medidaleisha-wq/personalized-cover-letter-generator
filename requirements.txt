@@ -1,0 +1,8 @@
+Flask
+Flask-Login
+Authlib
+PyPDF2
+python-docx
+pdfkit
+Werkzeug
+google-generativeai
