@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Cover Letter Generator</title>
+
+<style>
+body {
+  background: #f4f7fb;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  width: 80%;
+  max-width: 900px;
+  background: white;
+  margin: 30px auto;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+h1 { text-align: center; color: #2c3e50; }
+.subtitle { text-align: center; margin-bottom: 20px; color: gray; }
+
+.row { display: flex; gap: 10px; }
+
+input, textarea, select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+textarea { height: 80px; }
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.generate { background: #3498db; color: white; }
+.clear { background: #e74c3c; color: white; }
+
+.output { margin-top: 25px; }
+.output textarea { height: 150px; }
+
+#loader { display:none; text-align:center; color:#3498db; }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>AI Personalized Cover Letter Generator</h1>
+  <p class="subtitle">Generate a professional cover letter in seconds</p>
+
+  <form id="form">
+    <div class="row">
+      <input id="name" type="text" placeholder="Full Name">
+      <input id="email" type="email" placeholder="Email">
+    </div>
+
+    <div class="row">
+      <input id="role" type="text" placeholder="Job Role">
+      <input id="company" type="text" placeholder="Company Name">
+    </div>
+
+    <textarea id="skills" placeholder="Skills (comma separated)"></textarea>
+    <textarea id="experience" placeholder="Experience Summary"></textarea>
+    <textarea id="jobdesc" placeholder="Job Description"></textarea>
+
+    <select id="tone">
+      <option>Select Tone</option>
+      <option>Formal</option>
+      <option>Professional</option>
+      <option>Friendly</option>
+      <option>Creative</option>
+    </select>
+
+    <div class="buttons">
+      <button type="button" class="generate" onclick="generate()">Generate</button>
+      <button type="reset" class="clear">Clear</button>
+    </div>
+  </form>
+
+  <div id="loader">Generating...</div>
+
+  <div class="output">
+    <h3>Generated Cover Letter</h3>
+    <textarea id="result" placeholder="AI output will appear here..."></textarea>
+
+    <div class="buttons">
+      <button onclick="copyText()">Copy</button>
+      <button onclick="regenerate()">Regenerate</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function generate() {
+  let name = document.getElementById("name").value;
+  let role = document.getElementById("role").value;
+  let company = document.getElementById("company").value;
+  let skills = document.getElementById("skills").value;
+  let experience = document.getElementById("experience").value;
+  let tone = document.getElementById("tone").value;
+
+  if (!name || !role || !company) {
+    alert("Please fill required fields!");
+    return;
+  }
+
+  document.getElementById("loader").style.display = "block";
+
+  setTimeout(() => {
+    let letter = `Dear Hiring Manager,
+
+My name is ${name} and I am applying for the ${role} position at ${company}. 
+I have experience in ${experience} and strong skills in ${skills}.
+
+I am confident that my abilities match your requirements and I would love the opportunity to contribute.
+
+Thank you for your time and consideration.
+
+Sincerely,
+${name}`;
+
+    document.getElementById("result").value = letter;
+    document.getElementById("loader").style.display = "none";
+  }, 1500);
+}
+
+function copyText() {
+  let text = document.getElementById("result");
+  text.select();
+  document.execCommand("copy");
+  alert("Copied!");
+}
+
+function regenerate() {
+  generate();
+}
+</script>
+
+</body>
+</html>
